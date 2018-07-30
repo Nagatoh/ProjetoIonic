@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { trigger, style, animate, transition } from '@angular/animations';
 /**
  * Generated class for the LoginPage page.
  *
@@ -12,6 +12,43 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  animations: [
+    trigger(
+      'login', [
+        transition(':enter', [
+          style({
+            opacity: 0
+          }),
+          animate("1s ease-in-out", style({
+            opacity: 1
+          }))
+        ]),
+        transition(':leave', [
+          style({
+            opacity: 0
+          })
+        ])
+      ],
+    ),
+    trigger(
+      'registro', [
+        transition(':enter', [
+          style({
+            opacity: 0
+          }),
+          animate("1s ease-in-out", style({
+            opacity: 1
+          }))
+        ]),
+        transition(':leave', [
+          style({
+            opacity: 0
+          })
+        ])
+      ],
+    ),
+  ]
+
 })
 export class LoginPage {
   login = true;
@@ -23,7 +60,16 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  exibirRegistrar(){
-    
+  //exibir form de registro
+  exibirRegistrar() {
+    this.login = false;
+    this.register = true;
   }
+
+  //exibir form de login
+  exibirLogin() {
+    this.login = true;
+    this.register = false;
+  }
+
 }
