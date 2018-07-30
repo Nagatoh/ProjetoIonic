@@ -7,7 +7,7 @@
 
 <ion-content>
     <!-- LOGIN -->
-    <div class="bg-login">
+    <div class="bg-login" *ngIf="login">
         <!--OVERLAY-->
         <div class="overlay">
             <!--LOGIN CONTAINER-->
@@ -30,14 +30,16 @@
                     <div class="padding-40">
                         <ion-list>
                             <ion-item class="bg-transparent no-padding mg-top-30">
-                                <ion-label class="gray bold">Username</ion-label>
-                                <ion-input type="text" class="gray"></ion-input>
+                                <ion-label stacked class="gray bold">Username</ion-label>
+                                <ion-input stacked type="text" class="gray"></ion-input>
                             </ion-item>
 
                             <ion-item class="bg-transparent no-padding mg-top-20">
-                                <ion-label class="gray bold">Password</ion-label>
-                                <ion-input type="password" class="gray"></ion-input>
+                                <ion-label stacked class="gray bold">Password</ion-label>
+                                <ion-input stacked type="password" class="gray"></ion-input>
                             </ion-item>
+
+
                         </ion-list>
                         <!--CTA-->
                         <div class="ctaLogin center bold">
@@ -60,7 +62,7 @@
         <div class="bg-login">
             <!--OVERLAY-->
             <div class="overlay">
-                <!--LOGIN CONTAINER-->
+                <!--REGISTER CONTAINER-->
                 <div>
                     <!-- LOGO-->
                     <div class="center padding-top-10-percent">
@@ -80,20 +82,19 @@
                         <div class="padding-40">
                             <ion-list>
                                 <ion-item class="bg-transparent no-padding mg-top-30">
-                                    <ion-label class="gray bold">Como você se chama?</ion-label>
+                                    <ion-label stacked class="gray bold">Como você se chama?</ion-label>
                                     <ion-input type="text" class="gray"></ion-input>
                                 </ion-item>
 
                                 <ion-item class="bg-transparent no-padding mg-top-20">
-                                    <ion-label class="gray bold">Qual é o seu e-mail?</ion-label>
+                                    <ion-label stacked class="gray bold">Qual é o seu e-mail?</ion-label>
                                     <ion-input type="email" class="gray"></ion-input>
                                 </ion-item>
 
                                 <ion-item class="bg-transparent no-padding mg-top-20">
-                                        <ion-label class="gray bold">Escolha uma super senha</ion-label>
-                                        <ion-input type="password" class="gray"></ion-input>
-                                    </ion-item>
-
+                                    <ion-label stacked class="gray bold">Escolha uma super senha :p</ion-label>
+                                    <ion-input type="password" class="gray"></ion-input>
+                                </ion-item>
                             </ion-list>
                             <!--CTA-->
                             <div class="ctaLogin center bold">

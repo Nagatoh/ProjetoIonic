@@ -14,8 +14,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  login = false;
-  register = true;
+  login = true;
+  register = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
