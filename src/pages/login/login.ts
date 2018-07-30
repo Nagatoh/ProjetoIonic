@@ -23,4 +23,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  exibirRegistrar(){
+    
+  }
 }
