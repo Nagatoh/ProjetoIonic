@@ -12,7 +12,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 //pages
 import { LoginPageModule } from '../pages/login/login.module';
-
+//Providers
+import { AuthProvider } from '../providers/auth';
+import { FirebaseProvider } from '../providers/firebase';
 
 
 
@@ -23,10 +25,12 @@ import { LoginPageModule } from '../pages/login/login.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    //firebase
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
     IonicModule.forRoot(MyApp),
+    //pages
     LoginPageModule,
   ],
   bootstrap: [IonicApp],
@@ -34,6 +38,8 @@ import { LoginPageModule } from '../pages/login/login.module';
     MyApp,
   ],
   providers: [
+    AuthProvider,
+    FirebaseProvider,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

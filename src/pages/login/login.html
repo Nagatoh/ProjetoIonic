@@ -7,7 +7,7 @@
 
 <ion-content>
     <!-- LOGIN -->
-    <div class="bg-login" *ngIf="login">
+    <div class="bg-login" *ngIf="login" [@login]>
         <!--OVERLAY-->
         <div class="overlay">
             <!--LOGIN CONTAINER-->
@@ -30,19 +30,17 @@
                     <div class="padding-40">
                         <ion-list>
                             <ion-item class="bg-transparent no-padding mg-top-30">
-                                <ion-label stacked class="gray bold">Username</ion-label>
-                                <ion-input stacked type="text" class="gray"></ion-input>
+                                <ion-label stacked class="snow bold">E-mail</ion-label>
+                                <ion-input type="email" class="snow" [(ngModel)]="loginForm.email"></ion-input>
                             </ion-item>
 
                             <ion-item class="bg-transparent no-padding mg-top-20">
-                                <ion-label stacked class="gray bold">Password</ion-label>
-                                <ion-input stacked type="password" class="gray"></ion-input>
+                                <ion-label stacked class="snow bold">Senha</ion-label>
+                                <ion-input type="password" class="snow" [(ngModel)]="loginForm.password"></ion-input>
                             </ion-item>
-
-
                         </ion-list>
                         <!--CTA-->
-                        <div class="ctaLogin center bold">
+                        <div class="ctaLogin center bold mg-top-30" (click)="fazerLogin()">
                             Entrar
                         </div>
                         <!--NOVA CONTA-->
@@ -58,7 +56,7 @@
         </div>
     </div>
     <!-- Register -->
-    <div class="bg-register" *ngIf="register">
+    <div class="bg-register" *ngIf="register" [@registro]>
         <div class="bg-login">
             <!--OVERLAY-->
             <div class="overlay">
@@ -82,23 +80,23 @@
                         <div class="padding-40">
                             <ion-list>
                                 <ion-item class="bg-transparent no-padding mg-top-30">
-                                    <ion-label stacked class="gray bold">Como você se chama?</ion-label>
-                                    <ion-input type="text" class="gray"></ion-input>
+                                    <ion-label stacked class="snow bold">Como você se chama?</ion-label>
+                                    <ion-input type="text" class="snow" [(ngModel)]="registerForm.name"></ion-input>
                                 </ion-item>
 
                                 <ion-item class="bg-transparent no-padding mg-top-20">
-                                    <ion-label stacked class="gray bold">Qual é o seu e-mail?</ion-label>
-                                    <ion-input type="email" class="gray"></ion-input>
+                                    <ion-label stacked class="snow bold">Qual é o seu e-mail?</ion-label>
+                                    <ion-input type="email" class="snow" [(ngModel)]="registerForm.email"></ion-input>
                                 </ion-item>
 
                                 <ion-item class="bg-transparent no-padding mg-top-20">
-                                    <ion-label stacked class="gray bold">Escolha uma super senha :p</ion-label>
-                                    <ion-input type="password" class="gray"></ion-input>
+                                    <ion-label stacked class="snow bold">Escolha uma super senha :p</ion-label>
+                                    <ion-input type="password" class="snow" [(ngModel)]="registerForm.password"></ion-input>
                                 </ion-item>
                             </ion-list>
                             <!--CTA-->
-                            <div class="ctaLogin center bold">
-                                Entrar
+                            <div class="ctaRegister center bold mg-top-30" (click)="criarNovaConta()">
+                                Cadastrar
                             </div>
                             <!--NOVA CONTA-->
                             <div class="txtRegistrar bold mg-top-20 center" (click)="exibirLogin()">

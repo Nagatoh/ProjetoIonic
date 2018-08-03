@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { AuthProvider } from '../../providers/auth';
+//import { AuthProvider } from '../../providers/auth';
+import { FirebaseProvider } from '../../providers/firebase';
 /**
  * Generated class for the LoginPage page.
  *
@@ -53,7 +56,23 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class LoginPage {
   login = true;
   register = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  loginForm = {
+    email: '',
+    password: ''
+  };
+  registerForm = {
+    email: '',
+    password: '',
+    name: ''
+  }
+
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private loadingCtrl: LoadingController,
+    private authProvider: AuthProvider,
+    private firebaseProvider: FirebaseProvider) {
   }
 
   ionViewDidLoad() {
@@ -70,6 +89,50 @@ export class LoginPage {
   exibirLogin() {
     this.login = true;
     this.register = false;
+  }
+
+  //Login
+  fazerLogin() {
+    let load = this.loadingCtrl.create();
+    load.present();
+
+    this.authProvider.login(this.loginForm)
+      .then((res) => {
+        load.dismiss();
+      })
+      .catch((err) => {
+        load.dismiss();
+      })
+  }
+
+  //Registro
+  criarNovaConta() {
+    let load = this.loadingCtrl.create();
+    load.present();
+
+    this.authProvider.register(this.registerForm)
+      .then((res) => {
+        let uid = res.user.uid;
+
+        //Organizar dados
+        let data = {
+          uid: uid,
+          name: this.registerForm.name,
+          email: this.registerForm.email
+        };
+
+        //Gravar user no firestore
+        this.firebaseProvider.postUser(data)
+          .then(() => {
+            load.dismiss();
+          })
+          .catch((err) => {
+            load.dismiss();
+          })
+      })
+      .catch((err) => {
+        load.dismiss();
+      })
   }
 
 }
