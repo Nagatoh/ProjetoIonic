@@ -4,12 +4,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { AuthProvider } from '../../providers/auth';
 //import { AuthProvider } from '../../providers/auth';
 import { FirebaseProvider } from '../../providers/firebase';
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -72,8 +67,9 @@ export class LoginPage {
     public navParams: NavParams,
     private loadingCtrl: LoadingController,
     private authProvider: AuthProvider,
-    private firebaseProvider: FirebaseProvider) {
-  }
+    private firebaseProvider: FirebaseProvider,
+    private storage: Storage
+  ) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -98,7 +94,17 @@ export class LoginPage {
 
     this.authProvider.login(this.loginForm)
       .then((res) => {
-        load.dismiss();
+        let uid = res.user.uid
+        this.firebaseProvider.getUser(uid)
+          .then((res) => {
+            let data = res.data();
+            this.storage.set('usuarios', data)
+              .then(() => {
+                load.dismiss();
+                this.navCtrl.setRoot('HomePage');
+              })
+          })
+
       })
       .catch((err) => {
         load.dismiss();
@@ -124,7 +130,12 @@ export class LoginPage {
         //Gravar user no firestore
         this.firebaseProvider.postUser(data)
           .then(() => {
-            load.dismiss();
+            //load.dismiss();
+            this.storage.set('usuarios', data)
+              .then(() => {
+                load.dismiss();
+                this.navCtrl.setRoot('HomePage');
+              })
           })
           .catch((err) => {
             load.dismiss();

@@ -1,11 +1,18 @@
 page-login {
  .bg-login{
-     width: 100%;
-     height: 100%;
-     background-image:url('/assets/imgs/street.jpg');
+    width: fit-content;
+    height: fit-content;
+     background-image:url('../assets/imgs/street.jpg');
      background-size:cover;
      background-position: center;
  }
+ .bg-register {
+    width: fit-content;
+    height: fit-content;
+    background-image: url('../assets/imgs/street.jpg');
+    background-size: cover;
+    background-position: center;
+}
  .overlay {
      width:100%;
      height:100%;
@@ -18,7 +25,13 @@ page-login {
     background: transparent;
 }
 .ctaLogin{
-    padding:10px;
+    padding:9.5px;
+    background:$gray;
+    border-radius: 100px;
+    color:$blue;
+}
+.ctaRegister {
+    padding:9.5px;
     background:$gray;
     border-radius: 100px;
     color:$blue;
@@ -26,4 +39,8 @@ page-login {
 .txtRegistrar{
     color:$gray;
 }
+.scroll-content{
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    }
 }

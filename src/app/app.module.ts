@@ -5,6 +5,10 @@ import { MyApp } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+//Plugin
+import { IonicStorageModule } from '@ionic/storage';
+
 //Firebase config
 import { firebaseConfig } from '../configs/firebase';
 import { AngularFireModule } from 'angularfire2';
@@ -25,6 +29,8 @@ import { FirebaseProvider } from '../providers/firebase';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    //plugins
+    IonicStorageModule.forRoot(),
     //firebase
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
