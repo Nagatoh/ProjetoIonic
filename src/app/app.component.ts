@@ -16,7 +16,8 @@ export class MyApp {
       //Decidir para qual pagina levar o usuário
       this.storage.get('usuario')
       .then((usuario) => {
-        this.rootPage = usuario ? 'LoginPage':'LoginPage'; // ainda sem home pg
+        console.log('usuario', usuario);
+        this.rootPage = usuario ? 'TabsPage':'TabsPage'; // ainda sem home pg
       })
       statusBar.styleDefault();
       splashScreen.hide();

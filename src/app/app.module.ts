@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//ionic
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Geolocation } from '@ionic-native/geolocation';
 
 //Plugin
 import { IonicStorageModule } from '@ionic/storage';
@@ -46,8 +48,10 @@ import { FirebaseProvider } from '../providers/firebase';
   providers: [
     AuthProvider,
     FirebaseProvider,
+    //ionic
     StatusBar,
     SplashScreen,
+    Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

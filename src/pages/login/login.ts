@@ -101,7 +101,7 @@ export class LoginPage {
             this.storage.set('usuarios', data)
               .then(() => {
                 load.dismiss();
-                this.navCtrl.setRoot('HomePage');
+                this.navCtrl.setRoot('TabsPage');
               })
           })
 
@@ -134,7 +134,7 @@ export class LoginPage {
             this.storage.set('usuarios', data)
               .then(() => {
                 load.dismiss();
-                this.navCtrl.setRoot('HomePage');
+                this.navCtrl.setRoot('TabsPage');
               })
           })
           .catch((err) => {
