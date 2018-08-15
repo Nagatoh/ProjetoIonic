@@ -10,6 +10,16 @@ $font-path: "../assets/fonts";
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
+$text-input-ios-show-valid-highlight: #FFF;
+$text-input-ios-highlight-color: #FFF;
+$text-input-ios-highlight-color-valid: #FFF;
+
+$text-input-md-show-valid-highlight: #FFF;
+$text-input-md-highlight-color: #FFF;
+$text-input-md-highlight-color-valid: #FFF;
+
+$text-input-highlight-color-valid: #FFF;
+$text-input-placeholder-color: #FFF;
 
 
 @import "ionic.globals";
@@ -48,6 +58,20 @@ $black:#46494C;
 $green: #32E875;
 
 
+.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input{
+  color: #FFF !important;
+}
+.item-label-stacked .text-input-md, .item-label-floating .text-input-md{
+  color: #FFF !important;
+}
+
+.item-label-stacked .input-wrapper, .item-label-floating .input-wrapper{
+  color: #FFF !important;
+}
+
+.tabs-ios .tabbar {
+    background-color: #333;
+}
 
 // App iOS Variables
 // --------------------------------------------------

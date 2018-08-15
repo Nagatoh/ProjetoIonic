@@ -8,6 +8,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 
+import { PopupComponent } from '../components/popup-component/popup';
+
 //Plugin
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -17,16 +19,20 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 //pages
-import { LoginPageModule } from '../pages/login/login.module';
+import { LoginPage } from '../pages/login/login';
 //Providers
 import { AuthProvider } from '../providers/auth';
 import { FirebaseProvider } from '../providers/firebase';
+import { LoadingService } from '../providers/loading.service';
+import { ToastService } from '../providers/toast.service';
+import { EstabelecimentosProvider } from '../providers/estabelecimentos';
 
 
 
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -38,12 +44,11 @@ import { FirebaseProvider } from '../providers/firebase';
     AngularFirestoreModule,
     AngularFireAuthModule,
     IonicModule.forRoot(MyApp),
-    //pages
-    LoginPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage
   ],
   providers: [
     AuthProvider,
@@ -51,8 +56,11 @@ import { FirebaseProvider } from '../providers/firebase';
     //ionic
     StatusBar,
     SplashScreen,
+    LoadingService,
+    ToastService,
     Geolocation,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    EstabelecimentosProvider,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })
 export class AppModule { }

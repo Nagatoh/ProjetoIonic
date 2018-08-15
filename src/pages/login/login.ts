@@ -1,60 +1,26 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, LoadingController, Slides } from 'ionic-angular';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { AuthProvider } from '../../providers/auth';
 //import { AuthProvider } from '../../providers/auth';
 import { FirebaseProvider } from '../../providers/firebase';
+import { LoadingService } from '../../providers/loading.service';
+import { ToastService } from '../../providers/toast.service';
 import { Storage } from '@ionic/storage';
 
-@IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
-  animations: [
-    trigger(
-      'login', [
-        transition(':enter', [
-          style({
-            opacity: 0
-          }),
-          animate("1s ease-in-out", style({
-            opacity: 1
-          }))
-        ]),
-        transition(':leave', [
-          style({
-            opacity: 0
-          })
-        ])
-      ],
-    ),
-    trigger(
-      'registro', [
-        transition(':enter', [
-          style({
-            opacity: 0
-          }),
-          animate("1s ease-in-out", style({
-            opacity: 1
-          }))
-        ]),
-        transition(':leave', [
-          style({
-            opacity: 0
-          })
-        ])
-      ],
-    ),
-  ]
-
+  templateUrl: 'login.html'
 })
 export class LoginPage {
+  @ViewChild(Slides) slides: Slides;
   login = true;
   register = false;
   loginForm = {
     email: '',
     password: ''
   };
+
   registerForm = {
     email: '',
     password: '',
@@ -65,85 +31,94 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private loadingCtrl: LoadingController,
+    private loadingCtrl: LoadingService,
+    private toastCtrl: ToastService,
     private authProvider: AuthProvider,
     private firebaseProvider: FirebaseProvider,
     private storage: Storage
   ) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    this.slides.lockSwipes(true);
+    this.storage.get('usuarios').then((usuario) => {
+      this.loginForm.email = usuario.email;
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
-  //exibir form de registro
-  exibirRegistrar() {
-    this.login = false;
-    this.register = true;
+  navLogin() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(0, 200);
+    this.slides.lockSwipes(true);
   }
 
-  //exibir form de login
-  exibirLogin() {
-    this.login = true;
-    this.register = false;
+  navRegister() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(1, 200);
+    this.slides.lockSwipes(true);
   }
 
   //Login
   fazerLogin() {
-    let load = this.loadingCtrl.create();
-    load.present();
-
-    this.authProvider.login(this.loginForm)
-      .then((res) => {
+    if (this.loginForm.email === '' || this.loginForm.password === '') {
+        this.toastCtrl.showToastAlert('Preencha os campos!');
+        return;
+    }
+    this.loadingCtrl.startLoading('Autenticando');
+    this.authProvider.login(this.loginForm).then((res) => {
         let uid = res.user.uid
-        this.firebaseProvider.getUser(uid)
-          .then((res) => {
-            let data = res.data();
-            this.storage.set('usuarios', data)
-              .then(() => {
-                load.dismiss();
-                this.navCtrl.setRoot('TabsPage');
-              })
-          })
-
-      })
-      .catch((err) => {
-        load.dismiss();
-      })
+        this.firebaseProvider.getUser(uid).then((res) => {
+          let data = res.data();
+          this.storage.set('usuarios', data).then(() => {
+            this.loadingCtrl.stopLoading();
+            this.navCtrl.setRoot('TabsPage');
+          }).catch((err) => {
+            console.log(err);
+            this.loadingCtrl.stopLoading();
+            this.toastCtrl.showToastAlert('Não foi possível autenticar');
+          });
+        });
+      }).catch((err) => {
+        this.loadingCtrl.stopLoading();
+        this.toastCtrl.showToastAlert('Credenciais Inválidas');
+      });
   }
 
   //Registro
   criarNovaConta() {
-    let load = this.loadingCtrl.create();
-    load.present();
+    if (this.registerForm.email === '' || this.registerForm.password === '' || this.registerForm.name === '') {
+        this.toastCtrl.showToastAlert('Preencha os campos!');
+        return;
+    }
+    this.loadingCtrl.startLoading('Criando conta');
+    this.authProvider.register(this.registerForm).then((res) => {
+      let uid = res.user.uid;
 
-    this.authProvider.register(this.registerForm)
-      .then((res) => {
-        let uid = res.user.uid;
+      //Organizar dados
+      let data = {
+        uid: uid,
+        name: this.registerForm.name,
+        email: this.registerForm.email
+      };
 
-        //Organizar dados
-        let data = {
-          uid: uid,
-          name: this.registerForm.name,
-          email: this.registerForm.email
-        };
-
-        //Gravar user no firestore
-        this.firebaseProvider.postUser(data)
-          .then(() => {
-            //load.dismiss();
-            this.storage.set('usuarios', data)
-              .then(() => {
-                load.dismiss();
-                this.navCtrl.setRoot('TabsPage');
-              })
-          })
-          .catch((err) => {
-            load.dismiss();
-          })
-      })
-      .catch((err) => {
-        load.dismiss();
-      })
+      //Gravar user no firestore
+      this.firebaseProvider.postUser(data).then(() => {
+        this.loadingCtrl.stopLoading();
+        this.toastCtrl.showToastAlert('Sua conta foi criada com sucesso');
+        this.loginForm.email = this.registerForm.email;
+        this.loginForm.password = this.registerForm.password;
+        this.navLogin();
+      }).catch((err) => {
+        this.loadingCtrl.stopLoading
+        this.toastCtrl.showToastAlert('Não foi possível cadastrar');
+        console.log('ERR', err);
+      });
+    }).catch((err) => {
+      this.loadingCtrl.stopLoading();
+      this.toastCtrl.showToastAlert('Não foi possível cadastrar');
+      console.log('ERR', err);
+    });
   }
 
 }

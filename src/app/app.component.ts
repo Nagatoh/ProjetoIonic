@@ -17,8 +17,8 @@ export class MyApp {
       this.storage.get('usuario')
       .then((usuario) => {
         console.log('usuario', usuario);
-        this.rootPage = usuario ? 'TabsPage':'TabsPage'; // ainda sem home pg
-      })
+        this.rootPage = LoginPage; ///usuario ? 'TabsPage':'TabsPage'; // ainda sem home pg
+      });
       statusBar.styleDefault();
       splashScreen.hide();
     });
