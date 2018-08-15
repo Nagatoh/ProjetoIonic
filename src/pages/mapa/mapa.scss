@@ -17,11 +17,6 @@ page-mapa {
 		}
 	}
 
-  .leaflet-popup-tip {
-    background-color: #b07679;
-    // display: none !important;
-  }
-
   .map-button {
     position: absolute;
     z-index: 11;
@@ -36,10 +31,6 @@ page-mapa {
 
   .map-container{
     height: calc(100% - 50px);
-
   }
 
-  .leaflet-popup-tip{
-    background-color: #5292a0;
-  }
 }

@@ -26,8 +26,8 @@ page-home {
   .search{
     width: 100%;
     border: 0;
-    height: 30px;
-    padding: 2px;
+    height: 100%;
+    padding: 2px 0px;
   }
 
   .img{
@@ -52,6 +52,8 @@ page-home {
   .info-time{
     font-size: 14px;
     color: #858585;
+    position: absolute;
+    bottom: 5px;
   }
 
   .event-row {
@@ -67,6 +69,29 @@ page-home {
 
   .img-col{
     padding: 0;
+  }
+
+  .day-division {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .break{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0px;
+  }
+
+  .line{
+    height: 2px;
+    width: 100%;
+    background-color: #434343;
+  }
+
+  .line-col{
+    text-align: center;
+    margin-top: 15px;
+    padding: 5px;
   }
 
 }

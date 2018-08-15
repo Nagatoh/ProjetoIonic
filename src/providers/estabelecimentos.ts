@@ -10,28 +10,28 @@ import { Injectable } from '@angular/core';
 export class EstabelecimentosProvider {
   private estabelecimentos = [
     {
-      nome: 'EST 1',
+      nome: 'Estabelecimento 1',
       nota: 5,
       url: '',
       lat: -20.336141,
       lng: -40.289168
     },
     {
-      nome: 'EST 2',
-      nota: 5,
+      nome: 'Estabelecimento 2',
+      nota: 4,
       url: '',
       lat: -20.337041,
       lng: -40.300168
     },
     {
-      nome: 'EST 3',
-      nota: 5,
+      nome: 'Estabelecimento 3',
+      nota: 3,
       url: '',
       lat: -20.336920,
       lng: -40.295921
     },
     {
-      nome: 'EST 4',
+      nome: 'Estabelecimento 4',
       nota: 5,
       url: '',
       lat: -20.336990,

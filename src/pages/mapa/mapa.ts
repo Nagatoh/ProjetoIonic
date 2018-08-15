@@ -40,11 +40,13 @@ export class MapaPage {
   }
 
   private initMap() {
-    this.map = leaflet.map('map').setView([-20.33433759,-40.2849475], 14);
-    leaflet.tileLayer(this.tileLayer, {
-      maxZoom: 18
-    }).addTo(this.map);
-    this.setMarkers();
+    setTimeout(() => {
+      this.map = leaflet.map('map').setView([-20.33433759,-40.2849475], 14);
+      leaflet.tileLayer(this.tileLayer, {
+        maxZoom: 18
+      }).addTo(this.map);
+      this.setMarkers();
+    }, 300);
   }
 
   ionViewDidEnter() {
@@ -53,39 +55,22 @@ export class MapaPage {
 
   setMarkers() {
     let self = this;
-    this.geolocation.getCurrentPosition().then((position)=>{
-      const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-      leaflet.marker([pos.lat, pos.lng]).addTo(this.map);
-      // let i = 0;
-      // for (let estabelecimento of this.estabelecimentos) {
-      //   leaflet.marker([estabelecimento.lat, estabelecimento.lng]).addTo(this.map).bindPopup(self.getPopUp(i));
-      //   i++;
-      // }
-
-    }).catch((err) => {
-      console.log(err);
-    });
-    const ctrl = leaflet.Routing.control({
-  addWaypoints: false,
-  createMarker: function(i, wp, nWps) {
-    return leaflet.marker(wp.latLng).bindPopup(self.getPopUp(i));
-  },
-    waypoints: this.estabelecimentos,
-    lineOptions: {
-      styles: [{color: '#68BD5F', opacity: 0.70, weight: 5}]
+    let i = 0;
+    for (let estabelecimento of this.estabelecimentos) {
+      let marker = leaflet.marker([estabelecimento.lat, estabelecimento.lng]);
+      marker.addTo(self.map);
+      marker.bindPopup(self.getPopUp(i));
+      i++;
     }
-  }).addTo(this.map);
+
   }
 
   private getPopUp(i) {
-    setTimeout(()=> {
-      let test = document.getElementById('marker-' + i);
-      console.log(test, i);
+    // setTimeout(()=> {
+      let test = document.getElementById('waypoint-' + i);
+      console.log('POPUP', test);
       return test;
-    }, 200);
+    // }, 200);
   }
 
 }

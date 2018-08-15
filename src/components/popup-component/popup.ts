@@ -7,12 +7,15 @@ import { Events } from 'ionic-angular';
 })
 export class PopupComponent {
   @Input('estabelecimento') estabelecimento: any;
+  private score = [];
   constructor(private events:Events) {
 
   }
 
   ngOnInit() {
-    
+    for(let i = 0; i< this.estabelecimento.nota;i ++){
+      this.score.push(i);
+    }
   }
 
 	getPopUp() {

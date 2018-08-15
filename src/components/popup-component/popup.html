@@ -4,9 +4,12 @@
 			{{ estabelecimento?.nome }}
 		</span>
 		<br />
+		<span class="score">Nota:
+			<ion-icon name="ios-star-outline" *ngFor="let star of score"></ion-icon>
+		</span>
 		<div class="spot-body">
-			Nota: {{ estabelecimento?.nota }}
-			<button ion-button class="show-detail-button" (click)="showPontoDetail(ponto)">Detalhes</button>
+			<br />
+			<button ion-button class="show-detail-button">Detalhes</button>
 		</div>
 	</div>
 </div>
