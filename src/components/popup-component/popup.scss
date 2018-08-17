@@ -18,6 +18,14 @@ page-mapa .leaflet-popup-tip {
 	background-color: #999 !important;
 }
 
+.leaflet-container a.leaflet-popup-close-button{
+	color: #444;
+}
+
+.star-icon{
+	margin-left: 3px;
+}
+
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
 	border-radius: 15px;
 }

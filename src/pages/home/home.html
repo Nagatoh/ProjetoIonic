@@ -11,19 +11,20 @@
       <div *ngFor="let evento of eventosFiltered; let i = index">
         <ion-row class="event-row" >
           <ion-col class="img-col" col-4>
-            <img class="img" src="https://scontent.fsdu2-2.fna.fbcdn.net/v/t1.0-9/39099567_2272050332810961_5995044140646137856_n.jpg?_nc_cat=0&oh=c46776ea8434e0d1d5eadb3383bbe75f&oe=5C00753F"/>
+            <img class="img" [src]="evento.foto"/>
           </ion-col>
-          <ion-col col-8>
-            <span class="event-title">{{ evento }}</span>
-            <br /><br />
-            <span class="info"> Estabelecimento {{ i + 1 }} </span>
-            <span class="info"> Confirmados: {{ (i + 1)*((i + 1) + 22) - 12 }} </span>
+          <ion-col class="info-col" col-8>
+            <span class="event-title">{{ evento.nome }}</span>
+            <br />
+            <span class="info"> {{ evento.estabelecimento }} </span>
             <br />
             <br />
-            <span class="info-time"> Início 20:00 - Término 04:00 </span>
+            <span class="info"> Confirmados: {{ evento.confirmados }} </span>
+            <br />
+            <span class="info-time"> Início {{ evento.inicio }} - Término {{ evento.termino }} </span>
           </ion-col>
         </ion-row>
-        <div class="break" *ngIf="i === 3">
+        <div class="break" *ngIf="i === 2">
           <ion-row>
             <ion-col class="line-col" col-4>
               <div class="line"></div>
@@ -36,7 +37,7 @@
             </ion-col>
           </ion-row>
         </div>
-        <div class="break" *ngIf="i === 7">
+        <div class="break" *ngIf="i === 4">
           <ion-row>
             <ion-col class="line-col" col-4>
               <div class="line"></div>

@@ -1,6 +1,6 @@
 page-home {
   .content{
-    background-color: #aaa;
+    background-color: #666;
   }
   .buscar-content{
     width: 100%;
@@ -10,7 +10,7 @@ page-home {
     // padding: 4px;
     background-color: #f9f9f9;
     z-index: 999;
-    box-shadow: 0 3px 2px 0px rgba(0, 0, 0, 0.1), 0 6px 3px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 2px 0px rgba(0, 0, 0, 0.12), 0 6px 3px 0 rgba(0, 0, 0, 0.14);
   }
 
   .h20{
@@ -23,6 +23,10 @@ page-home {
     margin-top: 30px;
   }
 
+  .info-col{
+    padding-left: 10px;
+  }
+
   .search{
     width: 100%;
     border: 0;
@@ -31,7 +35,7 @@ page-home {
   }
 
   .img{
-    width: 100%;
+    width: 200px;
     height: 100%;
   }
 
@@ -59,16 +63,17 @@ page-home {
   .event-row {
     background-color: #fafafa;
     margin-top: 15px;
-    box-shadow: 0 3px 2px 0px rgba(0, 0, 0, 0.14), 0 5px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 2px 0px rgba(0, 0, 0, 0.19), 0 5px 6px 0 rgba(0, 0, 0, 0.21);
     margin-left: 2%;
     margin-right: 2%;
     border-radius: 4px;
     padding: 0;
     overflow: hidden;
+    min-height: 130px;
   }
 
   .img-col{
-    padding: 0;
+    padding: 0px;
   }
 
   .day-division {

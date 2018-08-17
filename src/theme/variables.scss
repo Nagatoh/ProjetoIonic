@@ -70,7 +70,23 @@ $green: #32E875;
 }
 
 .tabs-ios .tabbar {
-    background-color: #333;
+    background-color: rgba(15, 61, 74, 1.0);
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon{
+  color: rgba(36, 118, 158, 1.0) !important;
+}
+
+.tabs-md .tab-button[aria-selected=true] {
+  color: rgba(36, 118, 158, 1.0) !important;
+}
+
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon{
+  color: rgba(36, 118, 158, 1.0) !important;
+}
+
+.tabs-ios .tab-button[aria-selected=true] {
+  color: rgba(36, 118, 158, 1.0) !important;
 }
 
 // App iOS Variables
