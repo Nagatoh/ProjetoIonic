@@ -2,8 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
-import leaflet from 'leaflet';
-import 'leaflet-routing-machine';
+//import leaflet from 'leaflet';
+//import 'leaflet-routing-machine';
 
 import { EstabelecimentosProvider } from '../../providers/estabelecimentos';
 
@@ -19,13 +19,14 @@ declare var google;
   ]
 })
 export class MapaPage {
-  @ViewChild('map') mapElement;
-  tileLayer = 'https://api.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+  @ViewChild('map') mapElement: ElementRef;
+  //tileLayer = 'https://api.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
   public options: GeolocationOptions;
   public currentPos: Geoposition;
-  private map:  any;
+  public map: any;
+  public places: Array<any>;
 
-  private estabelecimentos = [];
+  //private estabelecimentos = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,23 +36,114 @@ export class MapaPage {
   ) { }
 
   ionViewDidLoad() {
-    this.estabelecimentos = this.estabelecimentosProviders.getEstabelecimentos();
-    this.initMap();
+    // this.estabelecimentos = this.estabelecimentosProviders.getEstabelecimentos();
+    //this.initMap();
   }
-
-  private initMap() {
-    setTimeout(() => {
-      this.map = leaflet.map('map').setView([-20.33433759,-40.2849475], 14);
-      leaflet.tileLayer(this.tileLayer, {
-        maxZoom: 18
-      }).addTo(this.map);
-      this.setMarkers();
-    }, 300);
-  }
+  /*
+    private initMap() {
+      setTimeout(() => {
+        this.map = leaflet.map('map').setView([-20.33433759,-40.2849475], 14);
+        leaflet.tileLayer(this.tileLayer, {
+          maxZoom: 18
+        }).addTo(this.map);
+        this.setMarkers();
+      }, 300);
+    }*/
 
   ionViewDidEnter() {
+    this.getUserPosition();
+    console.log('this.getUserPosition();', this.getUserPosition());
+  }
+
+  getUserPosition() {
+    this.options = {
+      enableHighAccuracy: false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos: Geoposition) => {
+
+      this.currentPos = pos;
+
+      console.log(pos);
+      this.addMap(pos.coords.latitude, pos.coords.longitude);
+
+    }, (err: PositionError) => {
+      console.log("error : " + err.message);
+      ;
+    })
+  }
+
+  addMap(lat, long) {
+
+    let latLng = new google.maps.LatLng(lat, long);
+
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    
+        this.getRestaurants(latLng).then((results: Array<any>) => {
+          this.places = results;
+          console.log('this.places', this.places);
+          for (let i = 0; i < results.length; i++) {
+            this.createMarker(results[i]);
+          }
+        }, (status) => console.log(status));
+    
+    this.addMarker();
 
   }
+
+  addMarker() {
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+    let content = "<p>This is your current position !</p>";
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+
+  }
+  
+    getRestaurants(latLng) {
+      var service = new google.maps.places.PlacesService(this.map);
+      console.log('servicemap', service);
+      let request = {
+        location: latLng,
+        radius: 8047,
+        types: ["restaurant"]
+      };
+      return new Promise((resolve, reject) => {
+        service.nearbySearch(request, function (results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            resolve(results);
+          } else {
+            reject(status);
+          }
+  
+        });
+      });
+    }
+    
+
+  createMarker(place) {
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: place.geometry.location
+    });
+  }
+
+  /*
 
   setMarkers() {
     let self = this;
@@ -67,10 +159,10 @@ export class MapaPage {
 
   private getPopUp(i) {
     // setTimeout(()=> {
-      let test = document.getElementById('waypoint-' + i);
-      console.log('POPUP', test);
-      return test;
+    let test = document.getElementById('waypoint-' + i);
+    console.log('POPUP', test);
+    return test;
     // }, 200);
   }
-
+*/
 }
