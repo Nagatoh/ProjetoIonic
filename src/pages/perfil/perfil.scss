@@ -1,3 +1,13 @@
 page-perfil {
+    .social-cards ion-col {
+        padding: 0;
+      }
 
+      .label {
+        color: white;
+        padding: 8px;
+        font-family: Arial;
+    }
+
+    .other {background-color: #e7e7e7; color: black;}
 }
