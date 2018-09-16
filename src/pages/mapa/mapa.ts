@@ -63,7 +63,7 @@ export class MapaPage {
 
       this.currentPos = pos;
 
-      console.log(pos);
+      // console.log(pos);
       this.addMap(pos.coords.latitude, pos.coords.longitude);
 
     }, (err: PositionError) => {
@@ -85,15 +85,15 @@ export class MapaPage {
     }
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    
+
         this.getRestaurants(latLng).then((results: Array<any>) => {
           this.places = results;
-          console.log('this.places', this.places);
+          // console.log('this.places', this.places);
           for (let i = 0; i < results.length; i++) {
             this.createMarker(results[i]);
           }
         }, (status) => console.log(status));
-    
+
     this.addMarker();
 
   }
@@ -115,10 +115,10 @@ export class MapaPage {
     });
 
   }
-  
+
     getRestaurants(latLng) {
       var service = new google.maps.places.PlacesService(this.map);
-      console.log('servicemap', service);
+      // console.log('servicemap', service);
       let request = {
         location: latLng,
         radius: 8047,
@@ -131,11 +131,11 @@ export class MapaPage {
           } else {
             reject(status);
           }
-  
+
         });
       });
     }
-    
+
 
   createMarker(place) {
     let marker = new google.maps.Marker({

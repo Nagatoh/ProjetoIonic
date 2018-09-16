@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, Events } from 'ionic-angular';
 
-/**
- * Generated class for the TabsPage tabs.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -21,6 +16,12 @@ export class TabsPage {
   homeRoot = 'HomePage';
 
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public event: Events) {
+    event.subscribe('logout', () => {
+      this.navCtrl.setRoot(LoginPage);
+      event.unsubscribe('logout');
+    });
+
+  }
 
 }

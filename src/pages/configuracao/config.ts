@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 
-/**
- * Generated class for the ConfigPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -14,12 +9,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'config.html',
 })
 export class ConfigPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private alert: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public event: Events) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConfigPage');
+  }
+
+
+  logout() {
+    this.event.publish('logout', Date.now());
+  }
+
+  help() {
+    this.alert = this.alertCtrl.create({
+      title: 'AJUDA',
+      subTitle: 'texto'
+    });
+    this.alert.present();
+  }
+
+  about() {
+    this.alert = this.alertCtrl.create({
+      title: 'HOA',
+      subTitle: 'texto'
+    });
+    this.alert.present();
   }
 
 }

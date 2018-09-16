@@ -1,13 +1,28 @@
 page-perfil {
-    .social-cards ion-col {
-        padding: 0;
-      }
-
-      .label {
-        color: white;
-        padding: 8px;
-        font-family: Arial;
+  .social-cards ion-col {
+      padding: 0;
     }
 
-    .other {background-color: #e7e7e7; color: black;}
+    .label {
+      color: white;
+      padding: 8px;
+      font-family: Arial;
+  }
+
+  .other {
+    // background-color: #e7e7e7;
+     color: #24769e;
+     font-weight: 600;
+  }
+
+  .icon-class {
+    color: #95999a;
+  }
+
+  .position-top-right {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 25px;
+  }
 }

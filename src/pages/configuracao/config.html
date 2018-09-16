@@ -7,12 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>config</ion-title>
+    <ion-title>Configurações</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item class="ion-item-class" (click)="help()">AJUDA</ion-item>
+    <ion-item class="ion-item-class" (click)="about()">SOBRE O HOA</ion-item>
+    <ion-item class="ion-item-class" (click)="logout()">DESLOGAR</ion-item>
+  </ion-list>
 </ion-content>
