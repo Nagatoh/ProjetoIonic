@@ -20,6 +20,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 //pages
 import { LoginPage } from '../pages/login/login';
+import { ChatPage } from '../pages/friends/chat/chat';
+
 //Providers
 import { AuthProvider } from '../providers/auth';
 import { FirebaseProvider } from '../providers/firebase';
@@ -27,12 +29,11 @@ import { LoadingService } from '../providers/loading.service';
 import { ToastService } from '../providers/toast.service';
 import { EstabelecimentosProvider } from '../providers/estabelecimentos';
 
-
-
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage
+    LoginPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,8 @@ import { EstabelecimentosProvider } from '../providers/estabelecimentos';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage
+    LoginPage,
+    ChatPage
   ],
   providers: [
     AuthProvider,

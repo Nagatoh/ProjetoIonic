@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>AMIGO {{ amigoName }}</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content no-padding>
+  <ion-list class="message-list" >
+    <div *ngFor="let message of messages" [class]="orientationClass(message)">
+      <div [class]="baloonClass(message)">
+        <span class="message">{{ message.message }}</span>
+
+      </div>
+    </div>
+  </ion-list>
+  <div class="absolute-message-input">
+    <ion-row>
+      <ion-col col-9>
+        <ion-input class="message-input" placeholder="Digite sua mensagem..." [(ngModel)]="newMessage"></ion-input>
+      </ion-col>
+      <ion-col col-3>
+        <button class="send-button" (click)="sendMessage()">Enviar</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

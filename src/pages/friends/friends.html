@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Amigos</ion-title>
+      <ion-buttons end>
+        <button icon-only ion-button clear (click)="addFriend()">
+          <ion-icon class="f-24" name="ios-add" ></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content class="cards-bg social-cards">
+  <ion-list>
+    <ion-item *ngFor="let friend of [1,2,3,4]" >
+      <ion-row (click)="chat(friend)">
+        <ion-col col-9>
+          <span class="title">Amigo {{ friend }} </span>
+        </ion-col>
+        <ion-col col-3>
+          <span class="message" *ngIf="friend != 4">Online</span>
+          <span class="message-off" *ngIf="friend == 4">Offline</span>
+          <ion-badge *ngIf="friend === 1" >1</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

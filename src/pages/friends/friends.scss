@@ -1,0 +1,44 @@
+page-friends {
+  .social-cards ion-col {
+      padding: 0;
+    }
+
+    .label {
+      color: white;
+      padding: 8px;
+      font-family: Arial;
+  }
+
+  .other {
+    // background-color: #e7e7e7;
+     color: #24769e;
+     font-weight: 600;
+  }
+
+  .icon-class {
+    color: #95999a;
+  }
+
+  .position-top-right {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 25px;
+  }
+
+  .title {
+    font-size: 18px;
+    color: #95999a;
+  }
+
+  .message {
+    font-size: 14px;
+    color: #95999a;
+    font-weight: 600;
+  }
+
+  .message-off {
+    font-size: 14px;
+    color: #b0b0b0;
+  }
+}

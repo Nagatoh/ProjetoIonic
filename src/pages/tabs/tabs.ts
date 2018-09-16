@@ -14,6 +14,7 @@ export class TabsPage {
   mapaRoot = 'MapaPage';
   configRoot = 'ConfigPage';
   homeRoot = 'HomePage';
+  friendsRoot = 'FriendsPage';
 
 
   constructor(public navCtrl: NavController, public event: Events) {
