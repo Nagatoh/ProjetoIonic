@@ -103,16 +103,20 @@ export class MapaPage {
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: this.map.getCenter()
-    });
-
+		});
+		
     let content = "<p>This is your current position !</p>";
     let infoWindow = new google.maps.InfoWindow({
       content: content
     });
 
-    google.maps.event.addListener(marker, 'click', () => {
-      infoWindow.open(this.map, marker);
-    });
+    // google.maps.event.addListener(marker, 'click', () => {
+    //   infoWindow.open(this.map, marker);
+		// });
+		
+		marker.addListener('click', () => {
+			infoWindow.open(this.map, marker);
+		});
 
   }
 
@@ -142,7 +146,23 @@ export class MapaPage {
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: place.geometry.location
-    });
+		});
+
+		// let content = "<p><strong>"+place.name+"</strong></p>"+
+		// 							"<p>Rating:"+place.rating+"</p>"+
+		// 							"";
+		
+		let content = "<div style='float:left'><img src='"+place.icon+"'></div>"+
+		"<div style='float:right; padding: 10px;'><strong>"+place.name+"</strong><br/>"+
+		"<p><strong>Rating: </strong>"+place.rating+"</p></div>";
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+		});
+		
+		marker.addListener('click', () => {
+			infoWindow.open(this.map, marker);
+		});
   }
 
   /*
